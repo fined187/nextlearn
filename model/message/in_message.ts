@@ -1,0 +1,23 @@
+import { firestore } from "firebase-admin";
+
+interface MessageBase {
+  id: string;
+  message: string;
+  reply?: string;
+  author?: {
+    displayName: string;
+    photoURL?: string;
+  };
+  /** 비공개처리 여부 */
+  deny?: boolean;
+}
+
+export interface InMessage extends MessageBase {
+  createAt: string;
+  replyAt?: string;
+}
+
+export interface InMessageServer extends MessageBase {
+  createAt: firestore.Timestamp;
+  replyAt: firestore.Timestamp;
+}
